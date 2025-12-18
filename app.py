@@ -26,7 +26,7 @@ feature4 = st.number_input("Owner", min_value=0.0)
 # Prediction
 # -------------------------------
 if st.button("Predict"):
-    input_data = np.array([[Year, Present_Price, Kms_Driven, Owner]])
+    input_data = np.array([[feature1, feature2, feature3, feature4]])
     prediction = model.predict(input_data)
 
     st.success(f"Predicted Value: {prediction[0]:.2f}")
