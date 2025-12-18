@@ -5,8 +5,8 @@ import numpy as np
 # -------------------------------
 # Load trained model
 # -------------------------------
-with open("model.pkl", "rb") as file:
-    model = pickle.load(file)
+with open("LR.pkl", "rb") as file:
+    LR = pickle.load(file)
 
 st.set_page_config(page_title="Prediction App", layout="centered")
 
