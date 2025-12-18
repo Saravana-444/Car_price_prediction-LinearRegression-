@@ -18,15 +18,15 @@ st.write("Enter input values to get prediction")
 # Example: Car Price Prediction
 # -------------------------------
 feature1 = st.number_input("Year", min_value=0.0)
-feature2 = st.number_input("Present Price", min_value=0.0)
-feature3 = st.number_input("Kms Driven", min_value=0.0)
+feature2 = st.number_input("Present_Price", min_value=0.0)
+feature3 = st.number_input("Kms_Driven", min_value=0.0)
 feature4 = st.number_input("Owner", min_value=0.0)
 
 # -------------------------------
 # Prediction
 # -------------------------------
 if st.button("Predict"):
-    input_data = np.array([[Year, Present Price, Kms Driven, Owner]])
+    input_data = np.array([[Year, Present_Price, Kms_Driven, Owner]])
     prediction = model.predict(input_data)
 
     st.success(f"Predicted Value: {prediction[0]:.2f}")
