@@ -2,34 +2,25 @@ import streamlit as st
 import pickle
 import numpy as np
 
+st.title("🚗 Car Price Prediction")
+
 # Load model
-with open("LR.pkl", "rb") as file:
-    LR = pickle.load(file)
+with open("LR (1).pkl", "rb") as f:
+    LR = pickle.load(f)
 
-st.set_page_config(page_title="Car Price Prediction", layout="centered")
+# Get number of features model expects
+n_features = LR.n_features_in_
 
-st.title("🚗 Car Price Prediction App")
-st.write("Enter car details to predict selling price")
+st.write(f"Model expects {n_features} input features")
 
-# -------- INPUTS --------
-Year = st.number_input("Year", min_value=1990, max_value=2025, step=1)
-Present_Price = st.number_input("Present Price (in lakhs)", min_value=0.0)
-Kms_Driven = st.number_input("Kms Driven", min_value=0)
+# Create inputs dynamically
+inputs = []
+for i in range(n_features):
+    val = st.number_input(f"Feature {i+1}", value=0.0)
+    inputs.append(val)
 
-Fuel_Type = st.selectbox("Fuel Type", ["Petrol", "Diesel"])
-Seller_Type = st.selectbox("Seller Type", ["Dealer", "Individual"])
-Transmission = st.selectbox("Transmission", ["Manual", "Automatic"])
-
-# -------- ENCODING (must match training) --------
-Fuel_Type = 0 if Fuel_Type == "Petrol" else 1
-Seller_Type = 0 if Seller_Type == "Dealer" else 1
-Transmission = 0 if Transmission == "Manual" else 1
-
-# -------- PREDICTION --------
+# Prediction
 if st.button("Predict Price"):
-    input_data = np.array([[Year, Present_Price, Kms_Driven,
-                            Fuel_Type, Seller_Type, Transmission]])
-
+    input_data = np.array(inputs).reshape(1, -1)
     prediction = LR.predict(input_data)
-
-    st.success(f"💰 Estimated Car Price: ₹ {prediction[0]:.2f} lakhs")
+    st.success(f"💰 Predicted Price: {prediction[0]:.2f}")
