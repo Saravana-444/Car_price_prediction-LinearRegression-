@@ -5,7 +5,7 @@ import numpy as np
 st.title("🚗 Car Price Prediction")
 
 # Load model
-with open("LR(1).pkl", "rb") as f:
+with open("LR_O.pkl", "rb") as f:
     LR = pickle.load(f)
 
 # Get number of features model expects
